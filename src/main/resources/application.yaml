@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: serverapp
+
+server:
+  port: 9000
