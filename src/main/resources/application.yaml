@@ -1,6 +1,13 @@
 spring:
   application:
     name: serverapp
+  profiles:
+    active: dev
 
 server:
   port: 9000
+
+app:
+  name: Server App
+  version: 1.0.0
+  description: Project Backend for Intro Spring Boot
