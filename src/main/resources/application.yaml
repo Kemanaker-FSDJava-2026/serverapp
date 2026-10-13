@@ -3,7 +3,9 @@ spring:
     name: serverapp
   profiles:
     active: dev
-
+  config:
+    import: optional:file:.env[.properties]
+  
 server:
   port: 9000
 
