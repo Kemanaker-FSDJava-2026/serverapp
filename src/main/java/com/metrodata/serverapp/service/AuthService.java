@@ -2,6 +2,7 @@ package com.metrodata.serverapp.service;
 
 import java.util.Set;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.metrodata.serverapp.dto.request.RegistrationRequest;
@@ -22,6 +23,7 @@ public class AuthService {
   private final RegistrationMapper registrationMapper;
   private final RoleService roleService;
   private final EmployeeRepository employeeRepository;
+  private final PasswordEncoder passwordEncoder;
 
   // registration
   public RegistrationResponse registration(RegistrationRequest request) {
@@ -31,6 +33,9 @@ public class AuthService {
 
     // set default role
     user.setRoles(Set.of(roleService.getById(2)));
+
+    // set password
+    user.setPassword(passwordEncoder.encode(request.getPassword()));
 
     // relasi one to one
     user.setEmployee(employee);
