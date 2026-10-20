@@ -5,7 +5,11 @@ spring:
     active: dev
   config:
     import: optional:file:.env[.properties]
-  
+  # security:
+  #   user:
+  #     name: budi
+  #     password: budi
+
 server:
   port: 9000
 
