@@ -3,6 +3,7 @@ package com.metrodata.serverapp.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,18 +23,21 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/region")
+@PreAuthorize("hasAnyRole('ADMIN','USER')")
 public class RegionController {
 
   private final RegionService regionService;
 
   // getAll
   @GetMapping
+  @PreAuthorize("hasAnyAuthority('READ_ADMIN','READ_USER')")
   public List<Region> getAll() {
     return regionService.getAll();
   }
 
   // getById
   @GetMapping("/{id}")
+  @PreAuthorize("hasAuthority('READ_ADMIN')")
   public Region getById(@PathVariable Integer id) {
     return regionService.getById(id);
   }
