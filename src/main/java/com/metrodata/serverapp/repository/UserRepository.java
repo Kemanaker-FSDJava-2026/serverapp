@@ -10,6 +10,6 @@ import com.metrodata.serverapp.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-  @EntityGraph(attributePaths = { "roles", "roles.privileges" })
+  @EntityGraph(attributePaths = { "employee", "roles", "roles.privileges" })
   Optional<User> findByUsernameOrEmployeeEmail(String username, String email);
 }
