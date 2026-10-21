@@ -17,3 +17,6 @@ app:
   name: Server App
   version: 1.0.0
   description: Project Backend for Intro Spring Boot
+
+jwt:
+  secret: ${JWT_TOKEN}

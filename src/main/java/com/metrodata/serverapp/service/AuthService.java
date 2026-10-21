@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.metrodata.serverapp.config.JWTConfig;
 import com.metrodata.serverapp.dto.request.LoginRequest;
 import com.metrodata.serverapp.dto.request.RegistrationRequest;
 import com.metrodata.serverapp.dto.response.LoginResponse;
@@ -34,6 +35,7 @@ public class AuthService {
   private final PasswordEncoder passwordEncoder;
   private final AuthenticationManager authenticationManager;
   private final UserRepository userRepository;
+  private final JWTConfig jwtConfig;
 
   // ? registration
   public RegistrationResponse registration(RegistrationRequest request) {
@@ -80,6 +82,8 @@ public class AuthService {
     return LoginResponse.builder()
         .username(auth.getName())
         .email(user.getEmployee().getEmail())
-        .authorities(auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList()).build();
+        .authorities(auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList())
+        .token(jwtConfig.genarateToken(auth.getName()))
+        .build();
   }
 }
